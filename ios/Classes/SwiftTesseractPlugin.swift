@@ -165,6 +165,12 @@ public class SwiftTesseractPlugin: NSObject, FlutterPlugin {
                 
                 let myDictionary = recognizedBlock.reduce([String: Any]()) { (dict, RecognizedBlock) -> [String: Any] in
                     var dict = dict
+                    dict["text"] = RecognizedBlock.text
+                    dict["confidence"] = RecognizedBlock.confidence
+                    dict["boundingBoxOriginX"] = RecognizedBlock.boundingBox.origin.x
+                    dict["boundingBoxOriginY"] = RecognizedBlock.boundingBox.origin.y
+                    dict["boundingBoxWidth"] = RecognizedBlock.boundingBox.size.width
+                    dict["boundingBoxHeight"] = RecognizedBlock.boundingBox.size.height
                     return dict
                 }
                 

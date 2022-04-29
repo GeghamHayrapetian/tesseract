@@ -60,17 +60,17 @@ class Tesseract {
       String filePath, String prefix) async {
     try {
       final ByteData data =
-          await rootBundle.load('$TESS_DATA_PATH/$prefix.traineddata.gz');
+          await rootBundle.load('$TESS_DATA_PATH/$prefix.traineddata');
 
       final Uint8List bytes = data.buffer.asUint8List(
         data.offsetInBytes,
         data.lengthInBytes,
       );
 
-      var content = GZipCodec().decode(bytes);
+      // var content = GZipCodec().decode(bytes);
       File(filePath)
         ..createSync(recursive: true)
-        ..writeAsBytesSync(content);
+        ..writeAsBytesSync(bytes);
       print('Trained data file copied');
     } catch (ex) {
       print(" >>>>>>>> Error Occured while Copying tessData: " + ex.toString());
